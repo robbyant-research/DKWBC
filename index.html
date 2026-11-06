@@ -1,0 +1,1382 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta
+      name="description"
+      content="DKWBC decouples model-based motion tracking from learned balancing for accurate, transferable humanoid whole-body control."
+    />
+    <title>DKWBC | Decoupling Motion Tracking and Balancing</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/site.css" />
+    <script src="js/video-wall.js" defer></script>
+    <script src="js/motion-data.js" defer></script>
+    <script src="js/equation.js" defer></script>
+    <script src="js/stories.js" defer></script>
+    <script src="js/scaling-data.js" defer></script>
+    <script src="js/scaling.js" defer></script>
+    <script src="js/citation.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#video-wall">Skip to content</a>
+    <header class="site-nav"
+      ><div class="site-nav-inner"><a class="nav-brand" href="#top">DKWBC</a></div></header
+    >
+    <div class="page">
+      <nav class="side-nav" aria-label="Page sections">
+        <span class="toc-title">Contents</span>
+        <a href="#top">Top</a><a href="#video-wall">Motions</a><a href="#results">Scaling</a
+        ><a href="#motivation">Motivation</a><a href="#methods">Method</a
+        ><a href="#citation">BibTeX</a>
+      </nav>
+      <main class="content">
+        <div class="content-group content-group-intro">
+          <header class="hero" id="top">
+            <div class="hero-title-region">
+              <h1
+                ><span class="title-mark title-acronym">DKWBC</span
+                ><span class="title-description"
+                  >Decoupling <span class="title-tracking">Motion Tracking</span> and
+                  <span class="title-balancing">Balancing</span> for Humanoid Whole-Body
+                  Control</span
+                ></h1
+              >
+              <div class="publication-authors" aria-label="Authors and affiliations">
+                <div class="authors author-list">
+                  <span class="author-entry" aria-label="Dingkun Wei, Robbyant, Zhejiang University"
+                    ><a href="https://kune1008.github.io/" target="_blank" rel="noopener"
+                      >Dingkun Wei</a
+                    ></span
+                  >
+                  <span class="author-entry" aria-label="Zehong Shen, Robbyant, Project Lead"
+                    ><a href="https://zehongs.github.io/" target="_blank" rel="noopener"
+                      >Zehong Shen</a
+                    ><sup aria-label="Project Lead">*</sup></span
+                  >
+                  <span class="author-entry" aria-label="Huaijin Pi, The University of Hong Kong"
+                    ><a href="https://phj128.github.io/" target="_blank" rel="noopener"
+                      >Huaijin Pi</a
+                    ></span
+                  >
+                  <span
+                    class="author-entry"
+                    aria-label="Xueyang Wang, Robbyant, Zhejiang University"
+                    >Xueyang Wang</span
+                  >
+                  <span class="author-entry" aria-label="Xing Zhu, Robbyant">Xing Zhu</span>
+                  <span class="author-entry" aria-label="Hujun Bao, Zhejiang University"
+                    ><a href="http://www.cad.zju.edu.cn/home/bao/" target="_blank" rel="noopener"
+                      >Hujun Bao</a
+                    ></span
+                  >
+                  <span class="author-entry" aria-label="Yujun Shen, Robbyant, Corresponding Author"
+                    ><a href="https://shenyujun.github.io/" target="_blank" rel="noopener"
+                      >Yujun Shen</a
+                    ><sup aria-label="Corresponding Author">†</sup></span
+                  >
+                  <span
+                    class="author-entry"
+                    aria-label="Xiaowei Zhou, Zhejiang University, Corresponding Author"
+                    ><a href="https://www.xzhou.me/" target="_blank" rel="noopener">Xiaowei Zhou</a
+                    ><sup aria-label="Corresponding Author">†</sup></span
+                  >
+                </div>
+                <div class="affiliation-list" aria-label="Affiliations"
+                  ><span>Zhejiang University</span><span>Robbyant</span
+                  ><span>The University of Hong Kong</span></div
+                >
+                <div class="author-notes"
+                  ><span><sup>*</sup> Project Lead</span
+                  ><span><sup>†</sup> Corresponding Authors</span></div
+                >
+              </div>
+            </div>
+            <div class="hero-buttons">
+              <a
+                class="hero-button is-disabled"
+                data-link="arxiv"
+                role="link"
+                aria-disabled="true"
+                tabindex="0"
+                aria-describedby="paper-release-note"
+                ><i class="ai ai-arxiv" aria-hidden="true"></i>arXiv<span
+                  id="paper-release-note"
+                  class="hero-button-tooltip"
+                  role="tooltip"
+                  >Paper coming soon.</span
+                ></a
+              >
+              <span class="button-sep" aria-hidden="true">/</span>
+              <a
+                class="hero-button is-disabled"
+                data-link="code"
+                role="link"
+                aria-disabled="true"
+                tabindex="0"
+                aria-describedby="code-release-note"
+                ><i class="fa fa-github" aria-hidden="true"></i>Code<span
+                  id="code-release-note"
+                  class="hero-button-tooltip"
+                  role="tooltip"
+                  >Code will be released within a month.</span
+                ></a
+              >
+              <span class="button-sep" aria-hidden="true">/</span>
+              <a class="hero-button" data-link="cite" href="#citation"
+                ><i class="fa fa-quote-right" aria-hidden="true"></i>Cite</a
+              >
+            </div>
+          </header>
+          <div class="opening-results" aria-label="DKWBC results at a glance">
+            <section class="section-card intro-demo result-showcase" aria-label="DKWBC at a glance">
+              <div id="video-wall" class="video-wall" aria-label="Real-robot motion comparisons">
+                <div class="wall-heading showcase-heading"
+                  ><div
+                    ><p class="showcase-kicker">01 / Real-robot comparisons</p
+                    ><h2>One Policy for All Motions.</h2></div
+                  ></div
+                >
+                <div class="wall-stage"
+                  ><div class="wall-grid"
+                    ><a
+                      class="wall-tile"
+                      href="assets/videos/motion-01.mp4"
+                      data-title="Target / SONIC / DKWBC"
+                      aria-label="Open Target / SONIC / DKWBC comparison"
+                      ><div class="wall-media"
+                        ><video
+                          muted
+                          loop
+                          playsinline
+                          preload="metadata"
+                          poster="assets/posters/motion-01.jpg"
+                          aria-label="Target / SONIC / DKWBC comparison"
+                          ><source data-src="assets/videos/motion-01.mp4" type="video/mp4" /></video
+                        ><span class="wall-play" aria-hidden="true">▶</span></div
+                      ></a
+                    >
+                    <a
+                      class="wall-tile"
+                      href="assets/videos/motion-02.mp4"
+                      data-title="Target / SONIC / DKWBC"
+                      aria-label="Open Target / SONIC / DKWBC comparison"
+                      ><div class="wall-media"
+                        ><video
+                          muted
+                          loop
+                          playsinline
+                          preload="metadata"
+                          poster="assets/posters/motion-02.jpg"
+                          aria-label="Target / SONIC / DKWBC comparison"
+                          ><source data-src="assets/videos/motion-02.mp4" type="video/mp4" /></video
+                        ><span class="wall-play" aria-hidden="true">▶</span></div
+                      ></a
+                    >
+                    <a
+                      class="wall-tile"
+                      href="assets/videos/motion-03.mp4"
+                      data-title="Target / SONIC / DKWBC"
+                      aria-label="Open Target / SONIC / DKWBC comparison"
+                      ><div class="wall-media"
+                        ><video
+                          muted
+                          loop
+                          playsinline
+                          preload="metadata"
+                          poster="assets/posters/motion-03.jpg"
+                          aria-label="Target / SONIC / DKWBC comparison"
+                          ><source data-src="assets/videos/motion-03.mp4" type="video/mp4" /></video
+                        ><span class="wall-play" aria-hidden="true">▶</span></div
+                      ></a
+                    >
+                    <a
+                      class="wall-tile"
+                      href="assets/videos/motion-04.mp4"
+                      data-title="Target / SONIC / DKWBC"
+                      aria-label="Open Target / SONIC / DKWBC comparison"
+                      ><div class="wall-media"
+                        ><video
+                          muted
+                          loop
+                          playsinline
+                          preload="metadata"
+                          poster="assets/posters/motion-04.jpg"
+                          aria-label="Target / SONIC / DKWBC comparison"
+                          ><source data-src="assets/videos/motion-04.mp4" type="video/mp4" /></video
+                        ><span class="wall-play" aria-hidden="true">▶</span></div
+                      ></a
+                    >
+                    <a
+                      class="wall-tile featured-tile"
+                      href="assets/videos/motion-05.mp4"
+                      data-title="Target / SONIC / DKWBC"
+                      aria-label="Open Target / SONIC / DKWBC comparison"
+                      ><div class="wall-media"
+                        ><video
+                          id="wall-feature-video"
+                          muted
+                          loop
+                          playsinline
+                          preload="auto"
+                          poster="assets/posters/motion-05.jpg"
+                          aria-label="Target / SONIC / DKWBC comparison"
+                          ><source data-src="assets/videos/motion-05.mp4" type="video/mp4" /></video
+                        ><span class="wall-play" aria-hidden="true">▶</span></div
+                      ></a
+                    >
+                    <a
+                      class="wall-tile"
+                      href="assets/videos/motion-06.mp4"
+                      data-title="Target / SONIC / DKWBC"
+                      aria-label="Open Target / SONIC / DKWBC comparison"
+                      ><div class="wall-media"
+                        ><video
+                          muted
+                          loop
+                          playsinline
+                          preload="metadata"
+                          poster="assets/posters/motion-06.jpg"
+                          aria-label="Target / SONIC / DKWBC comparison"
+                          ><source data-src="assets/videos/motion-06.mp4" type="video/mp4" /></video
+                        ><span class="wall-play" aria-hidden="true">▶</span></div
+                      ></a
+                    >
+                    <a
+                      class="wall-tile"
+                      href="assets/videos/motion-07.mp4"
+                      data-title="Target / SONIC / DKWBC"
+                      aria-label="Open Target / SONIC / DKWBC comparison"
+                      ><div class="wall-media"
+                        ><video
+                          muted
+                          loop
+                          playsinline
+                          preload="metadata"
+                          poster="assets/posters/motion-07.jpg"
+                          aria-label="Target / SONIC / DKWBC comparison"
+                          ><source data-src="assets/videos/motion-07.mp4" type="video/mp4" /></video
+                        ><span class="wall-play" aria-hidden="true">▶</span></div
+                      ></a
+                    >
+                    <a
+                      class="wall-tile"
+                      href="assets/videos/motion-08.mp4"
+                      data-title="Target / SONIC / DKWBC"
+                      aria-label="Open Target / SONIC / DKWBC comparison"
+                      ><div class="wall-media"
+                        ><video
+                          muted
+                          loop
+                          playsinline
+                          preload="metadata"
+                          poster="assets/posters/motion-08.jpg"
+                          aria-label="Target / SONIC / DKWBC comparison"
+                          ><source data-src="assets/videos/motion-08.mp4" type="video/mp4" /></video
+                        ><span class="wall-play" aria-hidden="true">▶</span></div
+                      ></a
+                    >
+                    <a
+                      class="wall-tile"
+                      href="assets/videos/motion-09.mp4"
+                      data-title="Target / SONIC / DKWBC"
+                      aria-label="Open Target / SONIC / DKWBC comparison"
+                      ><div class="wall-media"
+                        ><video
+                          muted
+                          loop
+                          playsinline
+                          preload="metadata"
+                          poster="assets/posters/motion-09.jpg"
+                          aria-label="Target / SONIC / DKWBC comparison"
+                          ><source data-src="assets/videos/motion-09.mp4" type="video/mp4" /></video
+                        ><span class="wall-play" aria-hidden="true">▶</span></div
+                      ></a
+                    >
+                    <a
+                      class="wall-tile"
+                      href="assets/videos/motion-10.mp4"
+                      data-title="Target / SONIC / DKWBC"
+                      aria-label="Open Target / SONIC / DKWBC comparison"
+                      ><div class="wall-media"
+                        ><video
+                          muted
+                          loop
+                          playsinline
+                          preload="metadata"
+                          poster="assets/posters/motion-10.jpg"
+                          aria-label="Target / SONIC / DKWBC comparison"
+                          ><source data-src="assets/videos/motion-10.mp4" type="video/mp4" /></video
+                        ><span class="wall-play" aria-hidden="true">▶</span></div
+                      ></a
+                    >
+                    <a
+                      class="wall-tile"
+                      href="assets/videos/motion-11.mp4"
+                      data-title="Target / SONIC / DKWBC"
+                      aria-label="Open Target / SONIC / DKWBC comparison"
+                      ><div class="wall-media"
+                        ><video
+                          muted
+                          loop
+                          playsinline
+                          preload="metadata"
+                          poster="assets/posters/motion-11.jpg"
+                          aria-label="Target / SONIC / DKWBC comparison"
+                          ><source data-src="assets/videos/motion-11.mp4" type="video/mp4" /></video
+                        ><span class="wall-play" aria-hidden="true">▶</span></div
+                      ></a
+                    >
+                    <a
+                      class="wall-tile"
+                      href="assets/videos/motion-12.mp4"
+                      data-title="Target / SONIC / DKWBC"
+                      aria-label="Open Target / SONIC / DKWBC comparison"
+                      ><div class="wall-media"
+                        ><video
+                          muted
+                          loop
+                          playsinline
+                          preload="metadata"
+                          poster="assets/posters/motion-12.jpg"
+                          aria-label="Target / SONIC / DKWBC comparison"
+                          ><source data-src="assets/videos/motion-12.mp4" type="video/mp4" /></video
+                        ><span class="wall-play" aria-hidden="true">▶</span></div
+                      ></a
+                    >
+                  </div></div
+                >
+              </div>
+            </section>
+            <section class="section-card result-showcase scaling-feature" id="results">
+              <div class="scaling-copy">
+                <header class="showcase-heading"
+                  ><div
+                    ><p class="showcase-kicker">02 / Data scaling</p><h2>Scaling Curves</h2></div
+                  ></header
+                >
+                <aside class="scaling-setup" aria-label="Experimental setup">
+                  <h3><i class="fa fa-sliders" aria-hidden="true"></i> Experimental setup</h3>
+                  <p
+                    ><span class="setup-label">Training</span>2–128 hours · G1 motion only<span
+                      class="setup-note"
+                      >SONIC is retrained without SMPL motion or other modalities.</span
+                    ></p
+                  >
+                  <p
+                    ><span class="setup-label">Evaluation</span>BONES-SEED test-repetition<br />3,019
+                    motions</p
+                  >
+                </aside>
+              </div>
+              <div class="scaling-visual">
+                <figure id="scaling-explorer" class="scaling-combined" hidden
+                  ><div class="curve-canvas"></div
+                  ><figcaption class="curve-announcement sr-only" aria-live="polite"></figcaption
+                ></figure>
+                <noscript
+                  ><img
+                    class="scaling-fallback"
+                    src="assets/figures/scaling-repetition.svg"
+                    alt="BONES-SEED test-repetition: success rate and MPJPE versus training hours, comparing DKWBC with SONIC."
+                /></noscript>
+              </div>
+            </section>
+          </div>
+        </div>
+        <div class="content-group content-group-main">
+          <section class="section-card" id="motivation">
+            <div class="section-header"><h2>Why Separate Tracking from Balancing?</h2></div>
+            <article class="motivation-interactive" id="dynamics-motivation">
+              <span class="step-label">01 / Dynamics decomposition</span
+              ><h3>Two contributions to joint torque</h3>
+              <p>Joint torque combines motion dynamics and environmental forces.</p>
+              <figure class="dynamics-figure">
+                <div
+                  class="diagram-controls"
+                  role="group"
+                  aria-label="Explore the dynamics decomposition"
+                >
+                  <button
+                    type="button"
+                    data-dynamics-step="0"
+                    aria-pressed="true"
+                    aria-controls="dynamics-equations"
+                    >Floating-base dynamics</button
+                  ><span aria-hidden="true">→</span>
+                  <button
+                    type="button"
+                    data-dynamics-step="1"
+                    aria-pressed="false"
+                    aria-controls="dynamics-equations"
+                    >Joint torques</button
+                  ><span aria-hidden="true">→</span>
+                  <button
+                    type="button"
+                    data-dynamics-step="2"
+                    aria-pressed="false"
+                    aria-controls="dynamics-equations"
+                    >Physical roles</button
+                  >
+                </div>
+                <div id="dynamics-equations" class="dynamics-equations">
+                  <svg
+                    class="dynamics-algebra"
+                    viewBox="0 0 900 124"
+                    role="img"
+                    aria-label="Floating-base dynamics"
+                  >
+                    <text data-algebra="motion" class="tracking-term">M(q)ν̇ + h(q, ν)</text>
+                    <text data-algebra="torque" class="torque-term">τ</text>
+                    <text data-algebra="actuation" class="algebra-neutral">S<tspan data-algebra-transpose baseline-shift="super" font-size="18">⊤</tspan></text>
+                    <text data-algebra="open" class="tracking-term">[</text>
+                    <text data-algebra="close" class="tracking-term">]</text>
+                    <text data-algebra="contactProjection" class="algebra-neutral">S</text>
+                    <text data-algebra="contact" class="balance-term">∑<tspan baseline-shift="sub" font-size="18">k</tspan> J<tspan baseline-shift="sub" font-size="18">k</tspan><tspan baseline-shift="super" font-size="18">⊤</tspan>λ<tspan baseline-shift="sub" font-size="18">k</tspan></text>
+                    <text data-algebra="equals">=</text>
+                    <g data-algebra="sign" class="algebra-sign">
+                      <path d="M-8 0H8"></path>
+                      <path data-algebra="signVertical" d="M0-8V8"></path>
+                    </g>
+                    <text data-algebra="motionLabel" class="algebra-caption tracking-term" text-anchor="middle">Model-based contribution</text>
+                    <text data-algebra="contactLabel" class="algebra-caption balance-term" text-anchor="middle">Environmental contribution</text>
+                    <text data-algebra="motionRole" class="tracking-term" text-anchor="middle">τ<tspan baseline-shift="sub" font-size="18">motion</tspan></text>
+                    <text data-algebra="contactRole" class="balance-term" text-anchor="middle">τ<tspan baseline-shift="sub" font-size="18">env</tspan></text>
+                    <text data-algebra="motionRoleLabel" class="algebra-caption tracking-term" text-anchor="middle">Motion dynamics</text>
+                    <text data-algebra="contactRoleLabel" class="algebra-caption balance-term" text-anchor="middle">Environmental forces</text>
+                  </svg>
+                  <div data-equation-step="0"
+                    ><div
+                      class="native-equation"
+                      aria-label="M q times nu dot plus h q nu equals S transpose tau plus sum J transpose lambda"
+                      ><span class="tracking-term">M(q)ν̇ + h(q, ν)</span><span>=</span
+                      ><span class="torque-term"
+                        ><span class="algebra-neutral">S<sup>⊤</sup></span
+                        >τ</span
+                      ><span>+</span
+                      ><span class="balance-term"
+                        >∑<sub>k</sub> J<sub>k</sub><sup>⊤</sup>λ<sub>k</sub></span
+                      ></div
+                    ></div
+                  >
+                  <div data-equation-step="1" hidden
+                    ><div
+                      class="native-equation"
+                      aria-label="Joint torque equals S times M nu dot plus h minus S sum J transpose lambda"
+                      ><span class="torque-term">τ =</span
+                      ><span class="equation-contribution tracking-term"
+                        ><span class="algebra-neutral">S</span>[M(q)ν̇ + h(q, ν)]<small
+                          >Model-based contribution</small
+                        ></span
+                      ><span>−</span
+                      ><span class="equation-contribution balance-term"
+                        ><span class="algebra-neutral">S</span> ∑<sub>k</sub> J<sub>k</sub
+                        ><sup>⊤</sup>λ<sub>k</sub><small>Environmental contribution</small></span
+                      ></div
+                    ></div
+                  >
+                  <div data-equation-step="2" hidden
+                    ><div
+                      class="native-equation"
+                      aria-label="Joint torque equals the motion contribution plus the environmental contribution"
+                      ><span class="torque-term">τ =</span
+                      ><span class="equation-contribution tracking-term"
+                        >τ<sub>motion</sub><small>Motion dynamics</small></span
+                      ><span>+</span
+                      ><span class="equation-contribution balance-term"
+                        >τ<sub>env</sub><small>Environmental forces</small></span
+                      ></div
+                    ></div
+                  >
+                </div>
+                <svg
+                  class="dynamics-canvas story-canvas"
+                  viewBox="0 0 900 380"
+                  role="img"
+                  aria-label="Tracking and balancing contributions on the left combine into the unchanged total joint-torque target on the right"
+                >
+                  <defs>
+                    <linearGradient id="ground-surface" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#f6f8f6"></stop>
+                      <stop offset="1" stop-color="#e8ede8"></stop>
+                    </linearGradient>
+                    <radialGradient id="foot-shadow">
+                      <stop offset="0" stop-color="#788778" stop-opacity=".28"></stop>
+                      <stop offset="1" stop-color="#788778" stop-opacity="0"></stop>
+                    </radialGradient>
+                    <marker
+                      id="sum-arrow"
+                      viewBox="0 0 10 10"
+                      refX="8"
+                      refY="5"
+                      markerWidth="10"
+                      markerHeight="10"
+                      markerUnits="userSpaceOnUse"
+                      orient="auto-start-reverse"
+                    >
+                      <path
+                        d="M1 1L8 5L1 9"
+                        fill="none"
+                        stroke="#bcc5c0"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </marker>
+                  </defs>
+                  <g class="contribution-links" style="opacity: 0; visibility: hidden">
+                    <path class="dynamics-branch" d="M448 100H494Q504 100 504 110V174"></path>
+                    <path class="dynamics-branch" d="M448 290H494Q504 290 504 280V216"></path>
+                    <circle cx="504" cy="195" r="20"></circle>
+                    <path d="M496 195H512M504 187V203"></path>
+                    <path
+                      class="dynamics-sum-output"
+                      d="M524 195H582"
+                      marker-end="url(#sum-arrow)"
+                    ></path>
+                  </g>
+                  <g
+                    class="tracking-formula"
+                    style="opacity: 0; visibility: hidden"
+                    transform="translate(0.000 0.000) scale(1.0000)"
+                  >
+                    <text class="formula-svg model-ink" x="260" y="108" text-anchor="middle"><tspan class="algebra-neutral">S</tspan>[M(q)ν̇ + h(q, ν)]</text>
+                  </g>
+                  <g
+                    class="balance-formula"
+                    style="opacity: 0; visibility: hidden"
+                    transform="translate(0.000 0.000) scale(1.0000)"
+                  >
+                    <text class="formula-svg support-ink" x="260" y="298" text-anchor="middle">−S ∑<tspan baseline-shift="sub" font-size="17">k</tspan> J<tspan baseline-shift="sub" font-size="17">k</tspan><tspan baseline-shift="super" font-size="17">⊤</tspan>λ<tspan baseline-shift="sub" font-size="17">k</tspan></text>
+                  </g>
+                  <g
+                    class="tracking-animation"
+                    style="opacity: 0; visibility: hidden"
+                    transform="translate(0.000 12.000) scale(1.0000)"
+                  >
+                    <text class="model-ink" x="96" y="99" text-anchor="middle">Tracking</text>
+                    <g
+                      class="tracking-ground ground suspended-ground"
+                      transform="translate(260.000 125.000) scale(1.0000)"
+                    >
+                      <path
+                        class="ground-plane"
+                        d="M-57 50H57Q60 50 62 52L77 67Q79 70 75 70H-75Q-79 70-77 67L-62 52Q-60 50-57 50Z"
+                      ></path>
+                      <ellipse
+                        class="ground-shadow"
+                        cx="-10.285275"
+                        cy="60"
+                        rx="27"
+                        ry="6"
+                      ></ellipse>
+                    </g>
+                    <g class="sling">
+                      <path d="M220 9H298M230 9L255.6667 60.361275M288 9L275.6667 60.361275"></path>
+                    </g>
+                    <g
+                      class="tracking-runner"
+                      data-stream="reference"
+                      data-frame="55.000"
+                      transform="translate(260.000 117.000) scale(0.7800)"
+                    >
+                      <image
+                        class="rendered-robot"
+                        href="assets/motion-frames/reference/055.webp"
+                        x="-85"
+                        y="-133.75"
+                        width="170"
+                        height="212.5"
+                      ></image>
+                    </g>
+                    <g
+                      class="tracking-cloud target-cloud"
+                      transform="translate(378.000 54.000) scale(0.4800)"
+                    >
+                      <path
+                        d="M-63 31C-96 26-91-13-66-20C-72-49-31-62-15-45C5-72 46-60 52-38C89-43 104-4 78 13C90 40 51 54 29 42C9 59-20 49-29 41C-44 50-62 44-63 31Z"
+                      ></path>
+                      <circle cx="-73" cy="58" r="6"></circle>
+                      <circle cx="-90" cy="75" r="3"></circle>
+                      <g
+                        class="tracking-cloud-pose"
+                        data-stream="reference"
+                        data-frame="67.000"
+                        transform="translate(0.000 12.000) scale(0.4900)"
+                      >
+                        <image
+                          class="rendered-robot"
+                          href="assets/motion-frames/reference/067.webp"
+                          x="-85"
+                          y="-133.75"
+                          width="170"
+                          height="212.5"
+                        ></image>
+                      </g>
+                      <text x="0" y="-75" text-anchor="middle">Target</text>
+                    </g>
+                  </g>
+                  <g
+                    class="balance-animation"
+                    style="opacity: 0; visibility: hidden"
+                    transform="translate(0 12)"
+                  >
+                    <text class="support-ink" x="96" y="290" text-anchor="middle">Balancing</text>
+                    <foreignObject
+                      class="dynamics-balancing-clip"
+                      x="182"
+                      y="219.2"
+                      width="170.625"
+                      height="156"
+                      ><div xmlns="http://www.w3.org/1999/xhtml" class="balancing-video-frame"
+                        ><canvas
+                          id="dynamics-balancing-video"
+                          class="balancing-video"
+                          aria-label="Balancing motion with torque shading, support arrows and smooth lift-off"
+                          width="420"
+                          height="384"
+                          role="img"
+                        ></canvas
+                        ><noscript
+                          ><img
+                            src="assets/animations/balancing-poster.png"
+                            alt="Balancing motion and support arrows"
+                            style="width: 100%" /></noscript></div
+                    ></foreignObject>
+                  </g>
+                  <g class="total-output">
+                    <g
+                      class="main-ground ground"
+                      transform="translate(390.000 220.000) scale(1.2300)"
+                    >
+                      <path
+                        class="ground-plane"
+                        d="M-57 50H57Q60 50 62 52L77 67Q79 70 75 70H-75Q-79 70-77 67L-62 52Q-60 50-57 50Z"
+                      ></path>
+                      <ellipse
+                        class="ground-shadow"
+                        cx="-13.18625"
+                        cy="60"
+                        rx="19"
+                        ry="4.5"
+                      ></ellipse>
+                    </g>
+                    <g
+                      class="main-force contact-force"
+                      transform="translate(393.461 219.788) scale(1.2300)"
+                      style="opacity: 1; visibility: visible"
+                    >
+                      <path d="M-16 60H-56" stroke-dasharray="3 4"></path>
+                      <path d="M-56 60V6M-56 6L-62 17M-56 6L-50 17"></path>
+                    </g>
+                    <g
+                      class="main-runner"
+                      data-stream="reference"
+                      data-frame="55.000"
+                      transform="translate(390.000 220.000) scale(1.2300)"
+                    >
+                      <image
+                        class="rendered-robot"
+                        href="assets/motion-frames/reference/055.webp"
+                        x="-85"
+                        y="-133.75"
+                        width="170"
+                        height="212.5"
+                      ></image>
+                    </g>
+                    <g
+                      class="main-cloud target-cloud"
+                      transform="translate(580.000 76.000) scale(0.7000)"
+                    >
+                      <path
+                        d="M-63 31C-96 26-91-13-66-20C-72-49-31-62-15-45C5-72 46-60 52-38C89-43 104-4 78 13C90 40 51 54 29 42C9 59-20 49-29 41C-44 50-62 44-63 31Z"
+                      ></path>
+                      <circle cx="-73" cy="58" r="6"></circle>
+                      <circle cx="-90" cy="75" r="3"></circle>
+                      <g
+                        class="main-cloud-pose"
+                        data-stream="reference"
+                        data-frame="67.000"
+                        transform="translate(0.000 12.000) scale(0.4900)"
+                      >
+                        <image
+                          class="rendered-robot"
+                          href="assets/motion-frames/reference/067.webp"
+                          x="-85"
+                          y="-133.75"
+                          width="170"
+                          height="212.5"
+                        ></image>
+                      </g>
+                      <text x="0" y="-75" text-anchor="middle">Target</text>
+                    </g>
+                    <text class="total-label torque-ink" x="685" y="337" text-anchor="middle" style="opacity:0;visibility:hidden">Total joint torque · τ</text>
+                  </g>
+                </svg>
+              </figure>
+            </article>
+            <article class="motivation-interactive" id="sonic-motivation">
+              <span class="step-label">02 / Existing approach</span
+              ><h3>Existing Approach: One PD Target, Two Responsibilities</h3>
+              <p
+                >A joint-position policy uses one PD target for both motion tracking and balance.</p
+              >
+              <figure class="sonic-figure">
+                <div
+                  class="diagram-controls sonic-controls"
+                  role="group"
+                  aria-label="Explore the joint-position policy pathway"
+                  ><button
+                    type="button"
+                    data-sonic-step="inputs"
+                    aria-pressed="true"
+                    aria-controls="sonic-diagram"
+                    >Reference + state</button
+                  ><span aria-hidden="true">→</span
+                  ><button
+                    type="button"
+                    data-sonic-step="policy"
+                    aria-pressed="false"
+                    aria-controls="sonic-diagram"
+                    >Policy</button
+                  ><span aria-hidden="true">→</span
+                  ><button
+                    type="button"
+                    data-sonic-step="target"
+                    aria-pressed="false"
+                    aria-controls="sonic-diagram"
+                    >PD target</button
+                  ><span aria-hidden="true">→</span
+                  ><button
+                    type="button"
+                    data-sonic-step="pd"
+                    aria-pressed="false"
+                    aria-controls="sonic-diagram"
+                    >PD controller</button
+                  ><span aria-hidden="true">→</span
+                  ><button
+                    type="button"
+                    data-sonic-step="execution"
+                    aria-pressed="false"
+                    aria-controls="sonic-diagram"
+                    >Robot execution</button
+                  ></div
+                >
+                <div class="comparison-equation"
+                  ><div
+                    class="pd-equation native-equation"
+                    aria-label="PD torque equals Kp times target minus joint position minus Kd times joint velocity"
+                    ><span
+                      >τ<sub>PD</sub> = K<sub>p</sub>(q<sub>PD</sub> − q) − K<sub>d</sub>q̇</span
+                    ></div
+                  ></div
+                >
+                <svg
+                  id="sonic-diagram"
+                  class="sonic-canvas story-canvas"
+                  viewBox="0 0 930 390"
+                  role="img"
+                  aria-label="Recorded robot state and reference feed the policy; its PD target drives the executed robot"
+                >
+                  <defs>
+                    <filter
+                      id="pd-yellow"
+                      x="-5%"
+                      y="-5%"
+                      width="110%"
+                      height="110%"
+                      color-interpolation-filters="sRGB"
+                    >
+                      <feColorMatrix
+                        type="matrix"
+                        values=".28 .56 .10 0 .18 .21 .42 .07 0 .12 .06 .12 .02 0 .025 0 0 0 1 0"
+                      ></feColorMatrix>
+                    </filter>
+                  </defs>
+                  <g class="sonic-support"><text class="sonic-state-label" text-anchor="middle" x="390" y="327">State</text></g>
+                  <g class="sonic-inputs">
+                    <g
+                      class="sonic-runner"
+                      data-stream="execution"
+                      data-frame="55.000"
+                      transform="translate(390.000 225.000) scale(1.3000)"
+                    >
+                      <image
+                        class="rendered-robot"
+                        href="assets/motion-frames/policyExecution/055.webp"
+                        x="-85"
+                        y="-133.75"
+                        width="170"
+                        height="212.5"
+                      ></image>
+                    </g>
+                    <g
+                      class="sonic-cloud target-cloud"
+                      transform="translate(580.000 73.000) scale(0.7800)"
+                    >
+                      <path
+                        d="M-63 31C-96 26-91-13-66-20C-72-49-31-62-15-45C5-72 46-60 52-38C89-43 104-4 78 13C90 40 51 54 29 42C9 59-20 49-29 41C-44 50-62 44-63 31Z"
+                      ></path>
+                      <circle cx="-73" cy="58" r="6"></circle>
+                      <circle cx="-90" cy="75" r="3"></circle>
+                      <g
+                        class="sonic-cloud-pose"
+                        data-stream="reference"
+                        data-frame="55.000"
+                        transform="translate(0.000 12.000) scale(0.4900)"
+                      >
+                        <image
+                          class="rendered-robot"
+                          href="assets/motion-frames/reference/055.webp"
+                          x="-85"
+                          y="-133.75"
+                          width="170"
+                          height="212.5"
+                        ></image>
+                      </g>
+                      <text x="0" y="-75" text-anchor="middle">Reference</text>
+                    </g>
+                  </g>
+
+                  <g class="sonic-input-wires" style="opacity: 0; visibility: hidden">
+                    <path class="sonic-incoming-wire" d="M145 73H170Q180 73 180 83V180"></path>
+                    <path class="sonic-incoming-wire" d="M140 240H170Q180 240 180 230V180"></path>
+                    <path
+                      class="sonic-policy-inlet"
+                      d="M180 180H220"
+                      marker-end="url(#sum-arrow)"
+                    ></path>
+                    <circle class="method-junction" cx="180" cy="180" r="2.5"></circle>
+                  </g>
+                  <g class="policy-symbol sonic-policy-box" style="opacity: 0; visibility: hidden">
+                    <rect
+                      class="sonic-policy-panel"
+                      x="220"
+                      y="107.5"
+                      width="215"
+                      height="145"
+                      rx="14"
+                    ></rect>
+                    <text class="lane-title" x="327.5" y="135" text-anchor="middle">Policy</text>
+                    <g
+                      class="comparison-network-icon comparison-module-icon"
+                      transform="translate(303.5 153)"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M4 3L24 9L44 3M4 15L24 9L44 27M4 27L24 21L44 3M4 3L24 21L44 27"
+                      ></path>
+                      <g>
+                        <circle cx="4" cy="3" r="3"></circle>
+                        <circle cx="4" cy="15" r="3"></circle>
+                        <circle cx="4" cy="27" r="3"></circle>
+                        <circle cx="24" cy="9" r="3"></circle>
+                        <circle cx="24" cy="21" r="3"></circle>
+                        <circle cx="44" cy="3" r="3"></circle>
+                        <circle cx="44" cy="27" r="3"></circle>
+                      </g>
+                    </g>
+                    <text class="sonic-policy-caption" x="327.5" y="211" text-anchor="middle">Joint-position policy · π</text>
+                  </g>
+                  <g class="coupled-objectives" style="opacity: 0; visibility: hidden">
+                    <text class="model-ink" x="470" y="30" text-anchor="middle">Tracking</text>
+                    <text class="support-ink" x="630" y="30" text-anchor="middle">Balancing</text>
+                    <path
+                      class="coupling-links coupling-branch"
+                      d="M470 43V59Q470 69 480 69H540Q550 69 550 79V92"
+                    ></path>
+                    <path
+                      class="coupling-links coupling-branch"
+                      d="M630 43V59Q630 69 620 69H560Q550 69 550 79V92"
+                    ></path>
+                    <path
+                      class="coupling-links coupling-inlet"
+                      d="M550 92V105"
+                      marker-end="url(#sum-arrow)"
+                    ></path>
+                  </g>
+                  <g class="policy-output" style="opacity: 0; visibility: hidden">
+                    <path class="control-link" d="M435 180H480" marker-end="url(#sum-arrow)"></path>
+                    <text class="method-math torque-ink" x="464" y="156" text-anchor="middle">q<tspan baseline-shift="sub" font-size="15">PD</tspan></text>
+                    <g
+                      class="sonic-target"
+                      data-stream="pd"
+                      data-frame="55.000"
+                      transform="translate(485.000 225.000) scale(1.0800)"
+                    >
+                      <image
+                        class="rendered-robot"
+                        href="assets/motion-frames/policyTarget/055.webp"
+                        x="-85"
+                        y="-133.75"
+                        width="170"
+                        height="212.5"
+                      ></image>
+                    </g>
+                    <text class="torque-ink" x="550" y="323" text-anchor="middle">PD target</text>
+                  </g>
+                  <g
+                    class="sonic-pd"
+                    transform="translate(720 180)"
+                    style="opacity: 0; visibility: hidden"
+                  >
+                    <path class="control-link" d="M-107 0H-37" marker-end="url(#sum-arrow)"></path>
+                    <rect x="-28" y="-29" width="56" height="58" rx="9"></rect>
+                    <text y="7" text-anchor="middle">PD</text>
+                  </g>
+                  <g class="sonic-output" style="opacity: 0; visibility: hidden">
+                    <path class="control-link" d="M748 180H775" marker-end="url(#sum-arrow)"></path>
+                    <text class="method-math torque-ink" x="755" y="136" text-anchor="middle">τ<tspan baseline-shift="sub" font-size="15">PD</tspan></text>
+                    <g
+                      class="sonic-execution-ground ground"
+                      transform="translate(790.000 225.000) scale(1.0800)"
+                    >
+                      <path
+                        class="ground-plane"
+                        d="M-57 50H57Q60 50 62 52L77 67Q79 70 75 70H-75Q-79 70-77 67L-62 52Q-60 50-57 50Z"
+                      ></path>
+                      <ellipse
+                        class="ground-shadow"
+                        cx="-4.88375"
+                        cy="60"
+                        rx="19"
+                        ry="4.5"
+                      ></ellipse>
+                    </g>
+                    <g
+                      class="sonic-execution"
+                      data-stream="execution"
+                      data-frame="56.000"
+                      transform="translate(790.000 225.000) scale(1.0800)"
+                    >
+                      <image
+                        class="rendered-robot"
+                        href="assets/motion-frames/policyExecution/056.webp"
+                        x="-85"
+                        y="-133.75"
+                        width="170"
+                        height="212.5"
+                      ></image>
+                    </g>
+                    <text x="830" y="323" text-anchor="middle">Execution</text>
+                  </g>
+                  <path
+                    class="feedback-wire sonic-feedback-wire"
+                    d="M830 336V342Q830 352 820 352H175Q165 352 165 342V280Q165 270 155 270H140"
+                    style="opacity: 0; visibility: hidden"
+                    marker-end="url(#sum-arrow)"
+                  ></path>
+                  <text class="feedback-label small-svg" x="480" y="377" text-anchor="middle" style="opacity:0;visibility:hidden">State feedback</text>
+                </svg>
+              </figure>
+            </article>
+          </section>
+          <section class="section-card" id="methods">
+            <div class="section-header"><h2>Decoupling Tracking and Balancing.</h2></div>
+            <p>Tracking and balancing produce separate torques that are added for execution.</p>
+            <figure
+              class="method-interactive-figure"
+              aria-label="Explore DKWBC's two torque pathways"
+            >
+              <div
+                class="diagram-controls method-controls"
+                role="group"
+                aria-label="Explore the DKWBC method"
+              >
+                <button
+                  type="button"
+                  data-method-step="0"
+                  aria-pressed="true"
+                  aria-controls="method-diagram"
+                  >Reference + state</button
+                ><span aria-hidden="true">→</span>
+                <button
+                  type="button"
+                  data-method-step="1"
+                  aria-pressed="false"
+                  aria-controls="method-diagram"
+                  >Explicit tracking</button
+                ><span aria-hidden="true">→</span>
+                <button
+                  type="button"
+                  data-method-step="2"
+                  aria-pressed="false"
+                  aria-controls="method-diagram"
+                  >Learned balancing</button
+                ><span aria-hidden="true">→</span>
+                <button
+                  type="button"
+                  data-method-step="3"
+                  aria-pressed="false"
+                  aria-controls="method-diagram"
+                  >Torque + execution</button
+                >
+              </div>
+              <div class="dynamics-equations method-equations">
+                <div data-method-equation="0"
+                  ><div class="native-equation"
+                    ><span class="tracking-term">q<sup>ref</sup>(t)</span><span>,</span
+                    ><span>(q, ν)</span></div
+                  ></div
+                >
+                <div data-method-equation="1" hidden
+                  ><div class="native-equation"
+                    ><span class="tracking-term"
+                      >τ<sub>trk</sub> = S[M̂(q)ν̇<sup>ref</sup> + ĥ(q, ν)] + τ<sub>pd</sub></span
+                    ></div
+                  ></div
+                >
+                <div data-method-equation="2" hidden
+                  ><div class="native-equation"
+                    ><span class="balance-term"
+                      >τ<sub>bal</sub> = s<sub>τ</sub> ⊙ π(o, τ<sub>acc</sub>, τ<sub>cor</sub>,
+                      τ<sub>grav</sub>)</span
+                    ></div
+                  ></div
+                >
+                <div data-method-equation="3" hidden
+                  ><div class="native-equation"
+                    ><span class="torque-term">τ<sub>cmd</sub> =</span
+                    ><span class="tracking-term">τ<sub>trk</sub></span
+                    ><span>+</span><span class="balance-term">τ<sub>bal</sub></span></div
+                  ></div
+                >
+              </div>
+              <svg
+                id="method-diagram"
+                class="method-canvas story-canvas"
+                viewBox="0 30 930 580"
+                role="img"
+                aria-label="Tracking shows an isolated feedforward and PD simulation with its reference pose. Balancing and execution show the recorded full DKWBC run."
+              >
+                <defs>
+                  <filter id="method-reference-blue" color-interpolation-filters="sRGB">
+                    <feColorMatrix
+                      type="matrix"
+                      values="0 0 0 0 .561 0 0 0 0 .420 0 0 0 0 .196 0 0 0 1 0"
+                    ></feColorMatrix>
+                  </filter>
+                </defs>
+                <g class="method-inputs">
+                  <g
+                    class="method-state-ground ground"
+                    transform="translate(390.000 300.000) scale(1.4000)"
+                  >
+                    <path
+                      class="ground-plane"
+                      d="M-57 50H57Q60 50 62 52L77 67Q79 70 75 70H-75Q-79 70-77 67L-62 52Q-60 50-57 50Z"
+                    ></path>
+                    <ellipse
+                      class="ground-shadow"
+                      cx="-0.38499999999999995"
+                      cy="60"
+                      rx="19"
+                      ry="4.5"
+                    ></ellipse>
+                  </g>
+                  <g
+                    class="method-state"
+                    data-stream="dkwbc"
+                    data-frame="55.000"
+                    transform="translate(390.000 300.000) scale(1.4000)"
+                  >
+                    <image
+                      class="rendered-robot"
+                      href="assets/motion-frames/dkwbcExecution/055.webp"
+                      x="-85"
+                      y="-133.75"
+                      width="170"
+                      height="212.5"
+                    ></image>
+                  </g>
+                  <g
+                    class="method-cloud target-cloud"
+                    transform="translate(580.000 140.000) scale(0.7500)"
+                  >
+                    <path
+                      d="M-63 31C-96 26-91-13-66-20C-72-49-31-62-15-45C5-72 46-60 52-38C89-43 104-4 78 13C90 40 51 54 29 42C9 59-20 49-29 41C-44 50-62 44-63 31Z"
+                    ></path>
+                    <circle cx="-73" cy="58" r="6"></circle>
+                    <circle cx="-90" cy="75" r="3"></circle>
+                    <g
+                      class="method-cloud-pose"
+                      data-stream="reference"
+                      data-frame="55.000"
+                      transform="translate(0.000 12.000) scale(0.4900)"
+                    >
+                      <image
+                        class="rendered-robot"
+                        href="assets/motion-frames/reference/055.webp"
+                        x="-85"
+                        y="-133.75"
+                        width="170"
+                        height="212.5"
+                      ></image>
+                    </g>
+                    <text x="0" y="-75" text-anchor="middle">Reference</text>
+                  </g>
+                  <text class="method-state-label" text-anchor="middle" x="390" y="412">State</text>
+                </g>
+
+                <g class="method-input-links" style="opacity: 0; visibility: hidden">
+                  <path class="control-link" d="M145 96H220" marker-end="url(#sum-arrow)"></path>
+                  <path class="control-link" d="M140 340H170Q180 340 180 330V96"></path>
+                  <circle class="method-junction" cx="180" cy="96" r="2.5"></circle>
+                </g>
+                <g class="method-tracking" style="opacity: 0; visibility: hidden">
+                  <g class="method-tracking-box method-box">
+                    <rect
+                      class="tracking-lane"
+                      x="220"
+                      y="55"
+                      width="215"
+                      height="145"
+                      rx="14"
+                    ></rect>
+                    <text class="lane-title model-ink" x="327.5" y="82" text-anchor="middle">Tracking</text>
+                    <g
+                      class="method-model-icon method-module-icon model-ink"
+                      transform="translate(305.5 99)"
+                      aria-hidden="true"
+                    >
+                      <rect x="0" y="0" width="44" height="29" rx="5"></rect>
+                      <path d="M9 9H35M9 20H35"></path>
+                      <circle cx="17" cy="9" r="3"></circle>
+                      <circle cx="28" cy="20" r="3"></circle>
+                    </g>
+                    <text class="module-title" x="327.5" y="157" text-anchor="middle">FF + Joint PD</text>
+                    <text class="small-svg method-tracking-rate" x="327.5" y="182" text-anchor="middle">FF 50 Hz · PD 200 Hz</text>
+                  </g>
+                  <path
+                    class="control-link method-tracking-output-link"
+                    style="opacity: 0; visibility: hidden"
+                    d="M435 96H625"
+                  ></path>
+                  <text class="method-math model-ink method-tracking-torque" x="468" y="80" text-anchor="middle">τ<tspan baseline-shift="sub" font-size="15">trk</tspan></text>
+                  <g class="method-tracking-preview">
+                    <g
+                      class="method-tracking-ground ground"
+                      transform="translate(520.000 215.000) scale(0.9000)"
+                    >
+                      <path
+                        class="ground-plane"
+                        d="M-57 50H57Q60 50 62 52L77 67Q79 70 75 70H-75Q-79 70-77 67L-62 52Q-60 50-57 50Z"
+                      ></path>
+                      <ellipse
+                        class="ground-shadow"
+                        cx="-0.30029999999999996"
+                        cy="60"
+                        rx="27"
+                        ry="6"
+                      ></ellipse>
+                    </g>
+                    <g
+                      class="method-tracking-state"
+                      data-stream="pintracking"
+                      data-frame="58.000"
+                      transform="translate(520.000 200.000) scale(0.7200)"
+                    >
+                      <image
+                        class="rendered-robot"
+                        href="assets/motion-frames/modelTracking/058.webp"
+                        x="-85"
+                        y="-133.75"
+                        width="170"
+                        height="212.5"
+                      ></image>
+                    </g>
+                    <g
+                      class="method-reference-ghost"
+                      data-stream="pinreference"
+                      data-frame="58.000"
+                      transform="translate(520.000 200.000) scale(0.7200)"
+                    >
+                      <image
+                        class="rendered-robot"
+                        href="assets/motion-frames/modelReference/058.webp"
+                        x="-85"
+                        y="-133.75"
+                        width="170"
+                        height="212.5"
+                      ></image>
+                    </g>
+                    <path class="method-sling sling" d="M485 110H555"></path>
+                  </g>
+                </g>
+                <g class="method-balancing" style="opacity: 0; visibility: hidden">
+                  <path
+                    class="control-link method-policy-input-link"
+                    d="M200 96V360Q200 370 210 370H220"
+                    marker-end="url(#sum-arrow)"
+                  ></path>
+                  <path
+                    class="method-observation-link"
+                    d="M327.5 200V330"
+                    marker-end="url(#sum-arrow)"
+                  ></path>
+                  <text class="small-svg" x="341" y="269" text-anchor="start">FF terms</text>
+                  <g class="method-balancing-box method-box">
+                    <rect
+                      class="balancing-lane"
+                      x="220"
+                      y="330"
+                      width="215"
+                      height="145"
+                      rx="14"
+                    ></rect>
+                    <text class="lane-title support-ink" x="327.5" y="357" text-anchor="middle">Balancing</text>
+                    <g
+                      class="method-network-icon method-module-icon support-ink"
+                      transform="translate(303.5 375)"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M4 3L24 9L44 3M4 15L24 9L44 27M4 27L24 21L44 3M4 3L24 21L44 27"
+                      ></path>
+                      <g>
+                        <circle cx="4" cy="3" r="3"></circle>
+                        <circle cx="4" cy="15" r="3"></circle>
+                        <circle cx="4" cy="27" r="3"></circle>
+                        <circle cx="24" cy="9" r="3"></circle>
+                        <circle cx="24" cy="21" r="3"></circle>
+                        <circle cx="44" cy="3" r="3"></circle>
+                        <circle cx="44" cy="27" r="3"></circle>
+                      </g>
+                    </g>
+                    <text class="method-policy-title" x="327.5" y="431" text-anchor="middle">Residual policy · π</text>
+                    <text class="small-svg method-balancing-rate" x="327.5" y="456" text-anchor="middle">Direct torque · 50 Hz</text>
+                  </g>
+                  <path
+                    class="control-link method-policy-output-link"
+                    style="opacity: 0; visibility: hidden"
+                    d="M435 370H625"
+                  ></path>
+                  <text class="method-math support-ink method-balancing-torque" x="468" y="354" text-anchor="middle">τ<tspan baseline-shift="sub" font-size="15">bal</tspan></text>
+                  <foreignObject
+                    class="method-balancing-clip"
+                    x="447"
+                    y="373"
+                    width="160"
+                    height="146.286"
+                    ><div xmlns="http://www.w3.org/1999/xhtml" class="balancing-video-frame"
+                      ><canvas
+                        id="balancing-video"
+                        class="balancing-video"
+                        aria-label="Recorded balancing motion with torque shading and support arrows"
+                        width="420"
+                        height="384"
+                        role="img"
+                      ></canvas
+                      ><noscript
+                        ><img
+                          src="assets/animations/balancing-poster.png"
+                          alt="Balancing motion and support arrows"
+                          style="width: 100%" /></noscript></div
+                  ></foreignObject>
+                </g>
+                <g class="method-command" style="opacity: 0; visibility: hidden">
+                  <path
+                    class="control-link method-tracking-sum-link"
+                    d="M625 96H680Q690 96 690 106V260Q690 270 700 270H702"
+                    marker-end="url(#sum-arrow)"
+                  ></path>
+                  <path
+                    class="control-link method-balancing-sum-link"
+                    d="M625 370H680Q690 370 690 360V300Q690 290 700 290H702"
+                    marker-end="url(#sum-arrow)"
+                  ></path>
+                  <circle class="method-sum" cx="720" cy="280" r="20"></circle>
+                  <path class="control-link method-sum-glyph" d="M712 280H728M720 272V288"></path>
+                  <path
+                    class="control-link method-command-output"
+                    d="M740 280H775"
+                    marker-end="url(#sum-arrow)"
+                  ></path>
+                  <text class="method-math torque-ink" x="755" y="256" text-anchor="middle">τ<tspan baseline-shift="sub" font-size="15">cmd</tspan></text>
+                </g>
+                <g class="method-output" style="opacity: 0; visibility: hidden">
+                  <g
+                    class="method-execution-ground ground"
+                    transform="translate(800.000 320.000) scale(1.1200)"
+                  >
+                    <path
+                      class="ground-plane"
+                      d="M-57 50H57Q60 50 62 52L77 67Q79 70 75 70H-75Q-79 70-77 67L-62 52Q-60 50-57 50Z"
+                    ></path>
+                    <ellipse class="ground-shadow" cx="-5.08" cy="60" rx="19" ry="4.5"></ellipse>
+                  </g>
+                  <g
+                    class="method-execution"
+                    data-stream="dkwbc"
+                    data-frame="56.000"
+                    transform="translate(800.000 320.000) scale(1.1200)"
+                  >
+                    <image
+                      class="rendered-robot"
+                      href="assets/motion-frames/dkwbcExecution/056.webp"
+                      x="-85"
+                      y="-133.75"
+                      width="170"
+                      height="212.5"
+                    ></image>
+                  </g>
+                  <text x="830" y="423" text-anchor="middle">Execution</text>
+                </g>
+                <g class="method-feedback" style="opacity: 0; visibility: hidden">
+                  <path
+                    class="feedback-wire"
+                    d="M830 442V565Q830 575 820 575H175Q165 575 165 565V395Q165 385 155 385H140"
+                    marker-end="url(#sum-arrow)"
+                  ></path>
+                  <text class="small-svg" x="480" y="599" text-anchor="middle">State feedback</text>
+                </g>
+              </svg>
+            </figure>
+            <noscript
+              ><figure class="method-figure"
+                ><img
+                  src="assets/figures/method.png"
+                  alt="DKWBC tracking and balancing torque pathways" /></figure
+            ></noscript>
+          </section>
+        </div>
+        <div class="content-group content-group-citation">
+          <section class="section-card citation-section" id="citation" aria-label="BibTeX citation">
+            <div class="citation-heading"
+              ><div class="section-header"><h2>BibTeX</h2></div
+              ><button id="copy-bibtex" type="button" aria-controls="bibtex"
+                >Copy BibTeX</button
+              ></div
+            >
+            <pre class="citation-bibtex"><code id="bibtex" tabindex="0">@misc{wei2026dkwbc,
+  title = {Decoupling Motion Tracking and Balancing for Humanoid Whole-Body Control},
+  author = {Dingkun Wei and Zehong Shen and Huaijin Pi and Xueyang Wang and Xing Zhu and Hujun Bao and Yujun Shen and Xiaowei Zhou},
+  year = {2026}
+}</code></pre>
+            <span
+              id="copy-bibtex-status"
+              class="citation-copy-status"
+              role="status"
+              aria-live="polite"
+            ></span>
+          </section>
+        </div>
+      </main>
+    </div>
+    <dialog id="video-dialog" aria-labelledby="dialog-title"
+      ><div class="dialog-header"
+        ><h2 id="dialog-title">Motion comparison</h2
+        ><button id="dialog-close" type="button" aria-label="Close video">×</button></div
+      ><video
+        id="dialog-video"
+        loop
+        controls
+        playsinline
+        preload="none"
+        aria-label="Selected motion comparison"
+      ></video
+    ></dialog>
+  </body>
+</html>
