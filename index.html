@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/fonts.css" />
     <link rel="stylesheet" href="css/site.css" />
     <script src="js/video-wall.js" defer></script>
+    <script src="js/generated-motions.js" defer></script>
     <script src="js/motion-data.js" defer></script>
     <script src="js/equation.js" defer></script>
     <script src="js/stories.js" defer></script>
@@ -28,7 +29,7 @@
     <div class="page">
       <nav class="side-nav" aria-label="Page sections">
         <span class="toc-title">Contents</span>
-        <a href="#top">Top</a><a href="#video-wall">Motions</a><a href="#results">Scaling</a
+        <a href="#top">Top</a><a href="#video-wall">Motions</a><a href="#generated-motions">Generated motions</a><a href="#results">Scaling</a
         ><a href="#motivation">Motivation</a><a href="#methods">Method</a
         ><a href="#citation">BibTeX</a>
       </nav>
@@ -350,11 +351,135 @@
                 >
               </div>
             </section>
+            <section class="section-card result-showcase generated-motions" id="generated-motions"
+              aria-labelledby="generated-motions-title">
+              <header class="showcase-heading">
+                <div><p class="showcase-kicker">02 / Generated motion tracking</p>
+                  <h2 id="generated-motions-title">Tracking Generated Motions</h2></div>
+              </header>
+              <p class="generated-source">Prompts are adapted from the
+                <a href="https://github.com/nv-tlabs/ardy/blob/main/scripts/interactive_demo/common.py#L161-L174"
+                  target="_blank" rel="noopener">ARDY repository’s preset prompt list</a>.</p>
+              <div class="generated-grid" id="generated-grid">
+                <figure class="generated-clip" data-motion-id="ARDY-01">
+                  <a class="generated-video-link" href="assets/videos/generated/ARDY-01-fixed-web.mp4" data-video-dialog
+                    data-title="A person walks forward at a steady pace." aria-label="Play tracking comparison: A person walks forward at a steady pace.">
+                    <video muted loop playsinline preload="none" poster="assets/posters/generated/ARDY-01-fixed-web.jpg"
+                      aria-label="SONIC and DKWBC tracking an ARDY-generated motion"
+                      data-src="assets/videos/generated/ARDY-01-fixed-web.mp4"></video>
+                    <span class="generated-play" aria-hidden="true">▶</span>
+                    <span class="generated-expand" aria-hidden="true">View comparison ↗</span>
+                  </a>
+                  <figcaption>
+                    <span class="generated-prompt-label">Prompt <span>01</span></span>
+                    <p class="generated-prompt">“A person walks forward at a steady pace.”</p>
+                  </figcaption>
+                </figure>
+                <figure class="generated-clip" data-motion-id="ARDY-02-s001">
+                  <a class="generated-video-link" href="assets/videos/generated/ARDY-02-s001-fixed-web.mp4" data-video-dialog
+                    data-title="A person makes one backward jump and lands." aria-label="Play tracking comparison: A person makes one backward jump and lands.">
+                    <video muted loop playsinline preload="none" poster="assets/posters/generated/ARDY-02-s001-fixed-web.jpg"
+                      aria-label="SONIC and DKWBC tracking an ARDY-generated motion"
+                      data-src="assets/videos/generated/ARDY-02-s001-fixed-web.mp4"></video>
+                    <span class="generated-play" aria-hidden="true">▶</span>
+                    <span class="generated-expand" aria-hidden="true">View comparison ↗</span>
+                  </a>
+                  <figcaption>
+                    <span class="generated-prompt-label">Prompt <span>02</span></span>
+                    <p class="generated-prompt">“A person makes one backward jump and lands.”</p>
+                  </figcaption>
+                </figure>
+                <figure class="generated-clip" data-motion-id="ARDY-03-s012">
+                  <a class="generated-video-link" href="assets/videos/generated/ARDY-03-s012-fixed-web.mp4" data-video-dialog
+                    data-title="A person repeatedly takes side steps to the right." aria-label="Play tracking comparison: A person repeatedly takes side steps to the right.">
+                    <video muted loop playsinline preload="none" poster="assets/posters/generated/ARDY-03-s012-fixed-web.jpg"
+                      aria-label="SONIC and DKWBC tracking an ARDY-generated motion"
+                      data-src="assets/videos/generated/ARDY-03-s012-fixed-web.mp4"></video>
+                    <span class="generated-play" aria-hidden="true">▶</span>
+                    <span class="generated-expand" aria-hidden="true">View comparison ↗</span>
+                  </a>
+                  <figcaption>
+                    <span class="generated-prompt-label">Prompt <span>03</span></span>
+                    <p class="generated-prompt">“A person repeatedly takes side steps to the right.”</p>
+                  </figcaption>
+                </figure>
+                <figure class="generated-clip" data-motion-id="ARDY-04-s003">
+                  <a class="generated-video-link" href="assets/videos/generated/ARDY-04-s003-fixed-web.mp4" data-video-dialog
+                    data-title="A person walks backward at a steady pace." aria-label="Play tracking comparison: A person walks backward at a steady pace.">
+                    <video muted loop playsinline preload="none" poster="assets/posters/generated/ARDY-04-s003-fixed-web.jpg"
+                      aria-label="SONIC and DKWBC tracking an ARDY-generated motion"
+                      data-src="assets/videos/generated/ARDY-04-s003-fixed-web.mp4"></video>
+                    <span class="generated-play" aria-hidden="true">▶</span>
+                    <span class="generated-expand" aria-hidden="true">View comparison ↗</span>
+                  </a>
+                  <figcaption>
+                    <span class="generated-prompt-label">Prompt <span>04</span></span>
+                    <p class="generated-prompt">“A person walks backward at a steady pace.”</p>
+                  </figcaption>
+                </figure>
+                <figure class="generated-clip" data-motion-id="ARDY-05-s003">
+                  <a class="generated-video-link" href="assets/videos/generated/ARDY-05-s003-fixed-web.mp4" data-video-dialog
+                    data-title="A person performs one kick with the right leg." aria-label="Play tracking comparison: A person performs one kick with the right leg.">
+                    <video muted loop playsinline preload="none" poster="assets/posters/generated/ARDY-05-s003-fixed-web.jpg"
+                      aria-label="SONIC and DKWBC tracking an ARDY-generated motion"
+                      data-src="assets/videos/generated/ARDY-05-s003-fixed-web.mp4"></video>
+                    <span class="generated-play" aria-hidden="true">▶</span>
+                    <span class="generated-expand" aria-hidden="true">View comparison ↗</span>
+                  </a>
+                  <figcaption>
+                    <span class="generated-prompt-label">Prompt <span>05</span></span>
+                    <p class="generated-prompt">“A person performs one kick with the right leg.”</p>
+                  </figcaption>
+                </figure>
+                <figure class="generated-clip" data-motion-id="ARDY-07">
+                  <a class="generated-video-link" href="assets/videos/generated/ARDY-07-fixed-web.mp4" data-video-dialog
+                    data-title="A person walks forward elegantly." aria-label="Play tracking comparison: A person walks forward elegantly.">
+                    <video muted loop playsinline preload="none" poster="assets/posters/generated/ARDY-07-fixed-web.jpg"
+                      aria-label="SONIC and DKWBC tracking an ARDY-generated motion"
+                      data-src="assets/videos/generated/ARDY-07-fixed-web.mp4"></video>
+                    <span class="generated-play" aria-hidden="true">▶</span>
+                    <span class="generated-expand" aria-hidden="true">View comparison ↗</span>
+                  </a>
+                  <figcaption>
+                    <span class="generated-prompt-label">Prompt <span>06</span></span>
+                    <p class="generated-prompt">“A person walks forward elegantly.”</p>
+                  </figcaption>
+                </figure>
+                <figure class="generated-clip" data-motion-id="ARDY-08">
+                  <a class="generated-video-link" href="assets/videos/generated/ARDY-08-fixed-web.mp4" data-video-dialog
+                    data-title="A person bows once and returns to an upright stance." aria-label="Play tracking comparison: A person bows once and returns to an upright stance.">
+                    <video muted loop playsinline preload="none" poster="assets/posters/generated/ARDY-08-fixed-web.jpg"
+                      aria-label="SONIC and DKWBC tracking an ARDY-generated motion"
+                      data-src="assets/videos/generated/ARDY-08-fixed-web.mp4"></video>
+                    <span class="generated-play" aria-hidden="true">▶</span>
+                    <span class="generated-expand" aria-hidden="true">View comparison ↗</span>
+                  </a>
+                  <figcaption>
+                    <span class="generated-prompt-label">Prompt <span>07</span></span>
+                    <p class="generated-prompt">“A person bows once and returns to an upright stance.”</p>
+                  </figcaption>
+                </figure>
+                <figure class="generated-clip" data-motion-id="ARDY-09">
+                  <a class="generated-video-link" href="assets/videos/generated/ARDY-09-fixed-web.mp4" data-video-dialog
+                    data-title="A ballet dancer repeats a turn while bringing the feet together." aria-label="Play tracking comparison: A ballet dancer repeats a turn while bringing the feet together.">
+                    <video muted loop playsinline preload="none" poster="assets/posters/generated/ARDY-09-fixed-web.jpg"
+                      aria-label="SONIC and DKWBC tracking an ARDY-generated motion"
+                      data-src="assets/videos/generated/ARDY-09-fixed-web.mp4"></video>
+                    <span class="generated-play" aria-hidden="true">▶</span>
+                    <span class="generated-expand" aria-hidden="true">View comparison ↗</span>
+                  </a>
+                  <figcaption>
+                    <span class="generated-prompt-label">Prompt <span>08</span></span>
+                    <p class="generated-prompt">“A ballet dancer repeats a turn while bringing the feet together.”</p>
+                  </figcaption>
+                </figure>
+              </div>
+            </section>
             <section class="section-card result-showcase scaling-feature" id="results">
               <div class="scaling-copy">
                 <header class="showcase-heading"
                   ><div
-                    ><p class="showcase-kicker">02 / Data scaling</p><h2>Scaling Curves</h2></div
+                    ><p class="showcase-kicker">03 / Data scaling</p><h2>Scaling Curves</h2></div
                   ></header
                 >
                 <aside class="scaling-setup" aria-label="Experimental setup">
@@ -974,7 +1099,10 @@
             </article>
           </section>
           <section class="section-card" id="methods">
-            <div class="section-header"><h2>Decoupling Tracking and Balancing.</h2></div>
+            <div class="section-header">
+              <span class="step-label method-kicker">03 / Our method</span>
+              <h2>Decoupling Tracking and Balancing.</h2>
+            </div>
             <p>Tracking and balancing produce separate torques that are added for execution.</p>
             <figure
               class="method-interactive-figure"

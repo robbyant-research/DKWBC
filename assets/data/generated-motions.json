@@ -1,0 +1,103 @@
+{
+  "generator": "ARDY",
+  "environment": "MuJoCo simulation",
+  "prompt_source": "https://github.com/nv-tlabs/ardy/blob/693f74d13b3d04a0a22ce127ee79c929dd89756b/scripts/interactive_demo/common.py#L161-L174",
+  "prompt_note": "Actual generation prompts are minor adaptations of the upstream presets.",
+  "videos": [
+    {
+      "id": "ARDY-01",
+      "video": "assets/videos/generated/ARDY-01-fixed-web.mp4",
+      "poster": "assets/posters/generated/ARDY-01-fixed-web.jpg",
+      "prompt": "A person walks forward at a steady pace.",
+      "upstream_prompt": "A person is walking.",
+      "sha256": "0de72f54f1ff410c6afea7064c9a965a453970e5241045e26c6fd4e8ef5b6375",
+      "seed": 42,
+      "source_sha256": "34ca890ca474aa95ee57d8bff6b87661ca49961e64c0410b1302146ce185838f"
+    },
+    {
+      "id": "ARDY-02-s001",
+      "video": "assets/videos/generated/ARDY-02-s001-fixed-web.mp4",
+      "poster": "assets/posters/generated/ARDY-02-s001-fixed-web.jpg",
+      "prompt": "A person makes one backward jump and lands.",
+      "upstream_prompt": "A person jumps backwards.",
+      "sha256": "b53e98c7cdcbb73656f65105d5676ead01e9c5bac001aeafc80139097aa014a1",
+      "seed": 1,
+      "source_sha256": "97225fa5db9218425128e20ad44804bd9a99da15f6a038037f048d52951fe2a0"
+    },
+    {
+      "id": "ARDY-03-s012",
+      "video": "assets/videos/generated/ARDY-03-s012-fixed-web.mp4",
+      "poster": "assets/posters/generated/ARDY-03-s012-fixed-web.jpg",
+      "prompt": "A person repeatedly takes side steps to the right.",
+      "upstream_prompt": "A person side steps to the right.",
+      "sha256": "ff29c71ccd559fa91104e23df4927fce5f88c97351ee9eb80222292be8810c3c",
+      "seed": 12,
+      "source_sha256": "34de70eda07ceab71f55930e0cb54703e19e696f60601a5f15c3eb83b86091ac"
+    },
+    {
+      "id": "ARDY-04-s003",
+      "video": "assets/videos/generated/ARDY-04-s003-fixed-web.mp4",
+      "poster": "assets/posters/generated/ARDY-04-s003-fixed-web.jpg",
+      "prompt": "A person walks backward at a steady pace.",
+      "upstream_prompt": "A person is walking backwards.",
+      "sha256": "fefe14d3613fd18903d4f4b3eb149408ff2f825bfd25a43f56c4157c07ac58d1",
+      "seed": 3,
+      "source_sha256": "eeafaa155bf2c90187df493c92b8bf8b7505f4a9a5011baa953621d010ddfdc2"
+    },
+    {
+      "id": "ARDY-05-s003",
+      "video": "assets/videos/generated/ARDY-05-s003-fixed-web.mp4",
+      "poster": "assets/posters/generated/ARDY-05-s003-fixed-web.jpg",
+      "prompt": "A person performs one kick with the right leg.",
+      "upstream_prompt": "A person is kicking with their right leg.",
+      "sha256": "eb9e35602ba8aab4403223cbebf2101aa6276d18e63efe6c0166ab1aa54f7596",
+      "seed": 3,
+      "source_sha256": "177061da8c2d6b1c443b58d07bd37020a1984d27d964387747e18474ad04c687"
+    },
+    {
+      "id": "ARDY-07",
+      "video": "assets/videos/generated/ARDY-07-fixed-web.mp4",
+      "poster": "assets/posters/generated/ARDY-07-fixed-web.jpg",
+      "prompt": "A person walks forward elegantly.",
+      "upstream_prompt": "A young lady walks forward elegantly.",
+      "sha256": "686cc3e55064b8479c75c0cc3f0f2e00d79cd3df3183dcd392ebebcd8597df02",
+      "seed": 42,
+      "source_sha256": "07e1a55cdb762893d98e901e2a19dd540adbd4fef613f5a78ccdf66186fd0b39"
+    },
+    {
+      "id": "ARDY-08",
+      "video": "assets/videos/generated/ARDY-08-fixed-web.mp4",
+      "poster": "assets/posters/generated/ARDY-08-fixed-web.jpg",
+      "prompt": "A person bows once and returns to an upright stance.",
+      "upstream_prompt": "A person bows down and then stands upright.",
+      "sha256": "275a9e24cf133bf047c507b5679e0101e082dbaee22742897adf767430bdc7f8",
+      "seed": 42,
+      "source_sha256": "03fe641768c9a2d52c0cd43571bd142fd95a8894acb0012974cfba77b80f1e49"
+    },
+    {
+      "id": "ARDY-09",
+      "video": "assets/videos/generated/ARDY-09-fixed-web.mp4",
+      "poster": "assets/posters/generated/ARDY-09-fixed-web.jpg",
+      "prompt": "A ballet dancer repeats a turn while bringing the feet together.",
+      "upstream_prompt": "A ballet dancer, performs a forward, turn joining feet, in a repeating loop",
+      "sha256": "6254f4cdc30adfe23f7e2e56687a8d365a161387dd23263aab274761a1d46a57",
+      "seed": 42,
+      "source_sha256": "e759f7d7a25bb95f0d4bea123404c61d1a9e70587fff4fbabdb24c81f307079f"
+    }
+  ],
+  "camera": "fixed orientation; reference-following translation; same camera for both methods",
+  "web_encoding": {
+    "codec": "H.264",
+    "width": 1280,
+    "height": 624,
+    "fps": 30,
+    "crf": 24,
+    "crop_source_px": {
+      "top": 60,
+      "bottom": 60,
+      "left": 0,
+      "right": 0
+    },
+    "faststart": true
+  }
+}

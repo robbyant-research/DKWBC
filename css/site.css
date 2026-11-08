@@ -449,11 +449,11 @@ a:hover {
 }
 
 .side-nav a:hover {
-  background: #f5f8ff;
+  background-color: #f5f8ff;
 }
 
 .side-nav a.active {
-  background: #eef4ff;
+  background-color: #eef4ff;
   color: var(--accent-text-color);
   font-weight: 600;
 }
@@ -849,7 +849,7 @@ figcaption {
   letter-spacing: 0.07em;
 }
 .side-nav a.active {
-  background: #edf4ee;
+  background-color: #edf4ee;
   color: #42624e;
 }
 .skip-link {
@@ -1009,7 +1009,8 @@ body.dialog-open {
   overflow: hidden;
   transition: height 1.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.wall-grid {
+.wall-grid,
+.generated-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px 12px;
@@ -1121,7 +1122,8 @@ body.dialog-open {
   stroke: #839e8d;
 }
 @media (max-width: 700px) {
-  .wall-grid {
+  .wall-grid,
+  .generated-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 13px 10px;
   }
@@ -2542,7 +2544,7 @@ a {
 .side-nav a:hover,
 .side-nav a.active {
   color: var(--text-color);
-  background: transparent;
+  background-color: transparent;
 }
 .side-nav a.active {
   transform: translateX(4px);
@@ -2555,6 +2557,10 @@ a {
 .section-header {
   text-align: left;
   margin-bottom: 26px;
+}
+.method-kicker {
+  display: block;
+  margin-bottom: 10px;
 }
 .section-header h2,
 .opening-results .showcase-heading h2,
@@ -3126,4 +3132,132 @@ a:not(.wall-tile):focus-visible,
 .scaling-combined .curve-end-label[data-method="SONIC"],
 .scaling-combined .curve-value[data-method="SONIC"] {
   fill: var(--tracking);
+}
+
+/* Text-generated references, presented in the same editorial style as the motion wall. */
+#generated-motions {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+#generated-motions p {
+  text-indent: 0;
+  text-align: left;
+}
+#generated-motions .generated-intro {
+  max-width: 88ch;
+  margin-bottom: 12px;
+  color: var(--copy-color);
+  font: 400 1rem/1.75 var(--body-font);
+}
+#generated-motions .generated-source {
+  max-width: 100ch;
+  margin-bottom: 24px;
+  color: var(--muted-color);
+  font: 400 0.875rem/1.75 var(--body-font);
+}
+.generated-source a {
+  color: var(--balancing);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.generated-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  margin-bottom: 18px;
+  color: var(--caption-color);
+  font: 400 0.8125rem/1.6 var(--body-font);
+}
+.generated-preview-toggle {
+  padding: 6px 11px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--copy-color);
+  font: inherit;
+  cursor: pointer;
+}
+.generated-preview-toggle:hover {
+  background: var(--balancing-wash);
+}
+.generated-clip {
+  min-width: 0;
+  margin: 0;
+}
+a.generated-video-link {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 1284 / 556;
+  border: 1px solid #1818180f;
+  border-radius: 10px;
+  background: white;
+}
+.generated-video-link video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0;
+  background: white;
+}
+.generated-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  background: #fffffff0;
+  color: var(--balancing);
+  font-size: 12px;
+}
+.generated-expand {
+  position: absolute;
+  right: 9px;
+  bottom: 8px;
+  padding: 3px 6px;
+  border-radius: 3px;
+  background: #fffffff0;
+  color: var(--copy-color);
+  font: 400 0.6875rem/1.5 var(--body-font);
+  opacity: 0;
+}
+.generated-video-link:hover .generated-expand,
+.generated-video-link:focus-visible .generated-expand {
+  opacity: 1;
+}
+.generated-video-link:focus-visible,
+.generated-preview-toggle:focus-visible {
+  outline: 2px solid var(--balancing);
+  outline-offset: 4px;
+}
+.generated-clip figcaption {
+  margin-top: 12px;
+  text-align: left;
+}
+.generated-prompt-label {
+  display: flex;
+  justify-content: space-between;
+  color: var(--caption-color);
+  font: 400 0.6875rem/1.5 var(--body-font);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+#generated-motions .generated-prompt {
+  margin: 7px 0 0;
+  color: var(--copy-color);
+  font: 400 0.875rem/1.4 var(--body-font);
+}
+@media (max-width: 700px) {
+  #generated-motions {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
 }

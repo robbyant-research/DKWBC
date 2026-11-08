@@ -121,12 +121,7 @@
       const active =
         visible &&
         (wallPhase === 'intro' ? video === featuredVideo && video.dataset.cached : wallVideosReady);
-      if (active)
-        video.play().catch(() => {
-          wallStatus.hidden = false;
-          wallStatus.disabled = false;
-          wallStatus.textContent = 'Click to play videos';
-        });
+      if (active) video.play().catch(() => {});
       else video.pause();
     });
   }
@@ -252,7 +247,7 @@
       if (video !== active) video.pause();
     });
   }
-  document.querySelectorAll('.wall-tile').forEach((link) =>
+  document.querySelectorAll('.wall-tile, [data-video-dialog]').forEach((link) =>
     link.addEventListener('click', (event) => {
       if (
         event.ctrlKey ||
