@@ -588,55 +588,6 @@ h3 {
   color: #23334c;
 }
 
-.hero-button[data-link="code"],
-.hero-button[data-link="code"]:hover,
-.hero-button[data-link="code"]:active,
-.hero-button[data-link="code"]:focus,
-.hero-button[data-link="code"]:focus-visible,
-.hero-button[data-link="code"]:visited,
-.hero-button[data-link="arxiv"],
-.hero-button[data-link="arxiv"]:hover,
-.hero-button[data-link="arxiv"]:active,
-.hero-button[data-link="arxiv"]:focus,
-.hero-button[data-link="arxiv"]:focus-visible,
-.hero-button[data-link="arxiv"]:visited {
-  color: #667085;
-  text-decoration: none;
-  outline: none;
-  box-shadow: none;
-}
-
-.hero-button.is-disabled {
-  cursor: default;
-}
-
-.hero-button-tooltip {
-  position: absolute;
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%) translateY(4px);
-  background: #1f2937;
-  color: #fff;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  padding: 5px 10px;
-  border-radius: 6px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition:
-    opacity 0.18s ease,
-    transform 0.18s ease;
-  z-index: 10;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.18);
-}
-
-.hero-button:hover .hero-button-tooltip {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
 .hero-button i {
   margin-right: 6px;
 }
@@ -776,11 +727,6 @@ h1 {
 }
 .ai-arxiv::before {
   content: "\e974";
-}
-.hero-button.is-disabled,
-.hero-button.is-disabled:hover {
-  color: #667085;
-  text-decoration: none;
 }
 .content-group-intro {
   gap: 30px;
@@ -2265,13 +2211,6 @@ button {
   min-height: 68px;
   padding: 11px 14px;
 }
-.hero-button.is-disabled {
-  position: relative;
-}
-.hero-button:focus-visible .hero-button-tooltip {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
 @media (max-width: 800px) {
   #motivation .motivation-interactive figure,
   #methods .method-interactive-figure {
@@ -2281,24 +2220,6 @@ button {
     font-size: calc(var(--subheading-font-size) - 2px);
     min-height: 68px;
     padding: 10px;
-  }
-  .hero-buttons {
-    position: relative;
-  }
-  .hero-button.is-disabled {
-    position: static;
-  }
-  .hero-button.is-disabled .hero-button-tooltip {
-    left: 0;
-    max-width: min(280px, 85vw);
-    white-space: normal;
-    width: max-content;
-    text-align: center;
-    transform: translateY(4px);
-  }
-  .hero-button.is-disabled:hover .hero-button-tooltip,
-  .hero-button.is-disabled:focus-visible .hero-button-tooltip {
-    transform: translateY(0);
   }
 }
 html,
@@ -2493,16 +2414,6 @@ a {
 .hero-button i,
 .button-sep {
   display: none;
-}
-.hero-button.is-disabled,
-.hero-button.is-disabled:hover,
-.hero-button[data-link="code"],
-.hero-button[data-link="arxiv"] {
-  color: var(--text-color);
-}
-.hero-button-tooltip {
-  font: 400 0.8125rem/1.5 var(--body-font);
-  letter-spacing: 0;
 }
 .side-nav {
   display: flex;
